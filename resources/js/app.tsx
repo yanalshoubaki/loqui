@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthenticatedLayout from "./Layouts/AuthenticatedLayout";
 import GuestLayout from "./Layouts/GuestLayout";
 import { UserEntity } from "./types/entity";
+import { ToastContainer } from "react-toastify";
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
@@ -33,6 +34,7 @@ createInertiaApp({
                         <App {...props} />
                     </GuestLayout>
                 )}
+                <ToastContainer />
             </QueryClientProvider>
         );
     },

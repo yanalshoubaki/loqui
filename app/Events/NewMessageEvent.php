@@ -18,18 +18,17 @@ class NewMessageEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(
-        public Message $message,
-    ) {
+    public function __construct(public mixed $message)
+    {
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return Channel|array
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('message.'.$this->message->id);
+        return ['new-message'];
     }
 }

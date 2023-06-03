@@ -41,7 +41,7 @@ class UserController extends GeneralController
     public function show(User $user)
     {
         $currentUser = $this->getCurrentUser();
-        if ($currentUser['id'] != $user->id) {
+        if ($currentUser->id != $user->id) {
             return $this->renderInertia('User/Sent', [
                 'user' => new UserResource($user),
             ]);
