@@ -8,6 +8,7 @@ import { MessageEntity, UserEntity } from "@/types/entity";
 import Pusher from "pusher-js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Echo from "laravel-echo";
 
 export default function Authenticated({
     user,
@@ -16,18 +17,15 @@ export default function Authenticated({
 }: PropsWithChildren<{ user: UserEntity; header?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
-    var pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
-        forceTLS: true,
-        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-    });
-    var channel = pusher.subscribe("new-message");
-    channel.bind(
-        "App\\Events\\NewMessageEvent",
+
+    window.Echo.channel(`private-message.${user.id}`).listen(
+        "NewMessageEvent",
         function (data: { message: MessageEntity }) {
             const { message } = data;
             toast.info(message.message + " from " + message.sender.name);
         }
     );
+
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
