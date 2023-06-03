@@ -5,6 +5,8 @@ use App\Http\Controllers\MediaObjectController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserFollowController;
+use App\Models\UserFollow;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +44,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'user' => 'username'
     ]);
     Route::resource('user.messages', MessageController::class)->only([
+        'index', 'show'
+    ]);
+    Route::resource('user.follows', UserFollowController::class)->only([
         'index', 'show'
     ]);
 });

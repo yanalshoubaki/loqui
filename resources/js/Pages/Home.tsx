@@ -20,9 +20,8 @@ type HomeProps = {
 export default function Home(props: HomeProps) {
     const { user, stats, messages, ...rest } = props;
     return (
-        <AuthenticatedLayout user={user}>
+        <>
             <Head title="Home" />
-
             <div className="py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex gap-12 flex-wrap flex-col md:flex-row justify-between">
@@ -42,6 +41,6 @@ export default function Home(props: HomeProps) {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </>
     );
 }

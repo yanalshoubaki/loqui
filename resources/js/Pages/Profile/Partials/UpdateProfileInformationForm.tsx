@@ -79,7 +79,6 @@ export default function UpdateProfileInformation({
     useEffect(() => {
         setCompleted(0);
     }, []);
-    console.log(completed);
     return (
         <section className={className}>
             <header>
@@ -129,8 +128,8 @@ export default function UpdateProfileInformation({
                             </label>
                         </div>
 
-                        <div className="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
-                            {completed! + 0 && (
+                        {completed != 0 && (
+                            <div className="mb-5 rounded-md bg-[#F5F7FB] py-4 px-8">
                                 <div className="rounded-md bg-[#F5F7FB] py-4 px-8">
                                     <div className="flex items-center justify-between">
                                         <span className="truncate pr-3 text-base font-medium text-[#07074D]">
@@ -166,8 +165,8 @@ export default function UpdateProfileInformation({
                                         ></div>
                                     </div>
                                 </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
                     {progress && (
                         <progress value={progress.percentage} max="100">

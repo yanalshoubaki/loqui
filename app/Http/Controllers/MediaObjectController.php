@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-class MediaObjectController extends ApiHandler
+class MediaObjectController extends Controller
 {
     /**
      * Display a listing of the resource.

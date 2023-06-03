@@ -22,7 +22,7 @@ type Props = {
 const Index = (props: Props) => {
     const { messages, user, stats, ...rest } = props;
     return (
-        <AuthenticatedLayout user={user}>
+        <>
             <Head title="Inbox" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,7 +43,7 @@ const Index = (props: Props) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </>
     );
 };
 

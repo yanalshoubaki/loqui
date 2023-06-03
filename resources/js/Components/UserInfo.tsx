@@ -1,4 +1,6 @@
+import { PageProps } from "@/types";
 import { UserEntity } from "@/types/entity";
+import { Link } from "@inertiajs/react";
 import * as React from "react";
 
 type UserInfoProps = {
@@ -36,18 +38,30 @@ export function UserInfo(props: UserInfoProps) {
                         </span>
                         <span>Messages</span>
                     </button>
-                    <button className="text-gray-800 hover:text-gray-700 flex flex-col justify-center items-center px-2">
+                    <Link
+                        href={route("user.follows.index", {
+                            user: user.username,
+                            tab: "followers",
+                        })}
+                        className="text-gray-800 hover:text-gray-700 flex flex-col justify-center items-center px-2"
+                    >
                         <span className="text-lg font-bold">
                             {stats.followers}
                         </span>
                         <span>Followers</span>
-                    </button>
-                    <button className="text-gray-800 hover:text-gray-700 flex flex-col justify-center items-center px-2">
+                    </Link>
+                    <Link
+                        href={route("user.follows.index", {
+                            user: user.username,
+                            tab: "following",
+                        })}
+                        className="text-gray-800 hover:text-gray-700 flex flex-col justify-center items-center px-2"
+                    >
                         <span className="text-lg font-bold">
                             {stats.following}
                         </span>
                         <span>Following</span>
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>

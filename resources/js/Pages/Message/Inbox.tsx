@@ -20,7 +20,7 @@ type InboxProps = {
 export default function Inbox(props: InboxProps) {
     const { user, stats, messages, ...rest } = props;
     return (
-        <AuthenticatedLayout user={user}>
+        <>
             <Head title="Inbox" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,6 +41,6 @@ export default function Inbox(props: InboxProps) {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </>
     );
 }

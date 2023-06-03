@@ -42,7 +42,7 @@ const Sent = (props: Props) => {
         post(route("messages.store"));
     };
     return (
-        <AuthenticatedLayout user={currentUser}>
+        <>
             <Head title="Inbox" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -93,7 +93,7 @@ const Sent = (props: Props) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </>
     );
 };
 

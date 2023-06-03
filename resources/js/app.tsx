@@ -5,7 +5,9 @@ import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import AuthenticatedLayout from "./Layouts/AuthenticatedLayout";
+import GuestLayout from "./Layouts/GuestLayout";
+import { UserEntity } from "./types/entity";
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
@@ -19,10 +21,18 @@ createInertiaApp({
     setup({ el, App, props }) {
         const root = createRoot(el);
         const queryClient = new QueryClient();
-
+        const pageProps = props.initialPage.props;
         root.render(
             <QueryClientProvider client={queryClient}>
-                <App {...props} />
+                {pageProps.is_logged_in ? (
+                    <AuthenticatedLayout user={pageProps.user as UserEntity}>
+                        <App {...props} />
+                    </AuthenticatedLayout>
+                ) : (
+                    <GuestLayout>
+                        <App {...props} />
+                    </GuestLayout>
+                )}
             </QueryClientProvider>
         );
     },
