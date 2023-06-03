@@ -1,0 +1,91 @@
+[
+  {
+    "_id": "46f7c7b7-7441-44f5-a2f2-8a93932053d1",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://loqui-backend.test/api/auth/sign-in",
+    "url": "http://loqui-backend.test/api/auth/sign-in",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-22T04:44:21.276Z",
+    "modified": "2023-04-22T04:46:48.970Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "email",
+          "value": "yanalshoubaki233@gmail.com"
+        },
+        {
+          "name": "password",
+          "value": "password"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "c7432fb9-d59b-4c6e-af3e-0ccc731b8e01",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://loqui-backend.test/api/auth/sign-in",
+    "url": "http://loqui-backend.test/api/auth/sign-in",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-22T05:46:42.202Z",
+    "modified": "2023-04-22T05:46:42.202Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "c8bc6841-bb8f-4c81-b2b8-57c61c69cbdf",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://loqui-backend.test/api/auth/sign-up",
+    "url": "http://loqui-backend.test/api/auth/sign-up",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-22T05:46:51.675Z",
+    "modified": "2023-04-22T05:48:34.063Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "Accept",
+        "value": "application/json"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"yanal shoubaki\",\n  \"email\" : \"yanalshoubaki233@gmail.com\",\n  \"username\": \"yanalshoubaki\",\n  \"password\": \"password\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]
