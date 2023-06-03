@@ -30,14 +30,14 @@ class CreateMessageReplayRequest extends FormRequest
                     $fail("You can't replay this message");
                 }
             }],
-            'message_id' => 'required|exists:messages,id'
+            'message_id' => 'required|exists:messages,id',
         ];
     }
 
     public function getInputs(): array
     {
         return $this->only([
-            'replay', 'image_id', 'user_id', 'message_id'
+            'replay', 'image_id', 'user_id', 'message_id',
         ]);
     }
 }

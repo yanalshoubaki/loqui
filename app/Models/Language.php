@@ -17,6 +17,6 @@ class Language extends Model
     protected $fillable = [
         'language_name',
         'language_code',
-        'language_flag'
+        'language_flag',
     ];
 }

@@ -18,6 +18,6 @@ class UserAuthApp extends Model
      */
     protected $fillable = [
         'user_id',
-        'secret'
+        'secret',
     ];
 }

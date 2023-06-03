@@ -15,7 +15,7 @@ class Message extends Model
         'user_id',
         'sender_id',
         'message',
-        'is_anon'
+        'is_anon',
     ];
 
     public function user()

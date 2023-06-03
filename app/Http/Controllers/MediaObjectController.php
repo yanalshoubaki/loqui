@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\API\ApiHandler;
 use App\Models\MediaObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,21 +31,22 @@ class MediaObjectController extends Controller
     public function store(Request $request)
     {
         try {
-            $image = date('Y') . "/" . date('m') . '/' . random_int(500, 999) * time() . '.' . $request->media->extension();
-            /** @var \Illuminate\Contracts\Filesystem\Filesystem  $publicStorage */
+            $image = date('Y').'/'.date('m').'/'.random_int(500, 999) * time().'.'.$request->media->extension();
+            /** @var \Illuminate\Contracts\Filesystem\Filesystem $publicStorage */
             Storage::putFileAs('public', $request->media, $image, 'public');
-            $mediaImage = Image::make(storage_path('app/public/' . $image));
+            $mediaImage = Image::make(storage_path('app/public/'.$image));
             $mediaObject = MediaObject::create([
                 'media_path' => $image,
                 'media_type' => 'image',
                 'media_name' => $mediaImage->filename,
                 'media_size' => $mediaImage->filesize(),
                 'media_extension' => $mediaImage->extension,
-                'media_mime_type' => $mediaImage->mime
+                'media_mime_type' => $mediaImage->mime,
             ]);
+
             return $mediaObject;
         } catch (\Throwable $th) {
-            return $this->getResponse(null, $th->getMessage(), "error");
+            return $this->getResponse(null, $th->getMessage(), 'error');
         }
     }
 

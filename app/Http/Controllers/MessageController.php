@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\WebRequest\CreateMessageReplayRequest;
 use App\Http\Requests\WebRequest\CreateMessageRequest;
-use App\Http\Resources\MessageReplayResource;
 use App\Http\Resources\MessageResource;
-use App\Http\Resources\UserResource;
 use App\Models\Message;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class MessageController extends GeneralController
 {
@@ -67,20 +64,20 @@ class MessageController extends GeneralController
                 ->where('id', $inputs['message_id'])
                 ->first();
 
-            if (!$message) {
+            if (! $message) {
                 return $this->responseError('Message not found');
             }
 
             $isCreated = $message->replay()->create($inputs);
-            if (!$isCreated) {
+            if (! $isCreated) {
                 return $this->responseError('Message replay not created');
             }
+
             return redirect()->route('messages.index');
         } catch (\Throwable $th) {
             throw $th;
         }
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -100,11 +97,12 @@ class MessageController extends GeneralController
             $inputs = $request->getInputs();
 
             $isCreated = Message::create($inputs);
-            if (!$isCreated) {
+            if (! $isCreated) {
                 return $this->responseError('Message replay not created');
             }
-            return redirect()->route("user.show", [
-                'user' => $isCreated->user
+
+            return redirect()->route('user.show', [
+                'user' => $isCreated->user,
             ]);
         } catch (\Throwable $th) {
             throw $th;

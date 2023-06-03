@@ -9,8 +9,6 @@ trait HasMedia
 {
     /**
      * Get the media object that owns the model.
-     *
-     * @return BelongsTo
      */
     public function media(): BelongsTo
     {

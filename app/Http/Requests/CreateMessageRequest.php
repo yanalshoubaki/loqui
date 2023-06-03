@@ -27,20 +27,20 @@ class CreateMessageRequest extends FormRequest
         return [
             'message' => 'required|string',
             'is_anon' => 'required|boolean',
-            "receiver_id" => [
+            'receiver_id' => [
                 'required', 'exists:users,id', function ($attribute, $value, $fail) {
                     if ($value == Auth::id()) {
                         $fail("You can't send message to yourself");
                     }
-                }
-            ]
+                },
+            ],
         ];
     }
 
     public function getInputs(): array
     {
         return $this->only([
-            'message', 'is_anon', 'receiver_id'
+            'message', 'is_anon', 'receiver_id',
         ]);
     }
 }

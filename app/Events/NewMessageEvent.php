@@ -3,9 +3,7 @@
 namespace App\Events;
 
 use App\Models\Message;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -22,7 +20,8 @@ class NewMessageEvent implements ShouldBroadcast
      */
     public function __construct(
         public Message $message,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the channels the event should broadcast on.
@@ -31,6 +30,6 @@ class NewMessageEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('message.' . $this->message->id);
+        return new PrivateChannel('message.'.$this->message->id);
     }
 }

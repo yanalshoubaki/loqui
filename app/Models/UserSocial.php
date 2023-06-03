@@ -11,7 +11,6 @@ class UserSocial extends Model
     use HasFactory;
     use HasUser;
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +19,6 @@ class UserSocial extends Model
     protected $fillable = [
         'user_id',
         'social_provider',
-        'social_id'
+        'social_id',
     ];
 }

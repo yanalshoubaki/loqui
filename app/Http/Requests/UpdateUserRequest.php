@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -27,10 +27,10 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $this->user()->id,
-            'username' => 'required|string|unique:users,username,' . $this->user()->id,
+            'email' => 'required|email|unique:users,email,'.$this->user()->id,
+            'username' => 'required|string|unique:users,username,'.$this->user()->id,
             'password' => 'required|string|min:8|confirmed',
-            'profile_image_id' => 'nullable|exists:media,id'
+            'profile_image_id' => 'nullable|exists:media,id',
         ];
     }
 
@@ -41,7 +41,7 @@ class UpdateUserRequest extends FormRequest
             'username' => $this->username,
             'profile_image_id' => $this->profile_image_id,
             'email' => $this->email,
-            'password' => Hash::make($this->password)
+            'password' => Hash::make($this->password),
         ];
     }
 }

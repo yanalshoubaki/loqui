@@ -42,16 +42,16 @@ class UserController extends GeneralController
     {
         $currentUser = $this->getCurrentUser();
         if ($currentUser['id'] != $user->id) {
-            /** @var \Illuminate\Database\Eloquent\Collection $getUserFollowing  */
+            /** @var \Illuminate\Database\Eloquent\Collection $getUserFollowing */
             $getUserFollowing = $user->following()->get();
-            /** @var \Illuminate\Database\Eloquent\Collection $getUserFollower  */
+            /** @var \Illuminate\Database\Eloquent\Collection $getUserFollower */
             $getUserFollower = $user->follower()->get();
-            /** @var \Illuminate\Database\Eloquent\Collection $getMessages  */
+            /** @var \Illuminate\Database\Eloquent\Collection $getMessages */
             $getMessages = $user->messages()->get();
             $stats = [
                 'following' => $getUserFollowing->count(),
                 'messages' => $getMessages->count(),
-                'followers' => $getUserFollower->count()
+                'followers' => $getUserFollower->count(),
             ];
 
             return $this->renderInertia('User/Sent', [
@@ -60,6 +60,7 @@ class UserController extends GeneralController
                 'currentUser' => $currentUser,
             ]);
         }
+
         return $this->renderInertia('User/Show', [
             'user' => $user,
         ]);

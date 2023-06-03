@@ -8,7 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class MessageResource extends JsonResource
 {
-
     public static $wrap = null;
 
     /**
@@ -30,8 +29,8 @@ class MessageResource extends JsonResource
             'replay' => $this->whenLoaded('replay', function () {
                 return new MessageReplayResource($this->replay->first());
             }),
-            'created_at' => Carbon::parse($this->created_at)->format("D-M-Y"),
-            'is_new' => $is_newest
+            'created_at' => Carbon::parse($this->created_at)->format('D-M-Y'),
+            'is_new' => $is_newest,
         ];
     }
 }

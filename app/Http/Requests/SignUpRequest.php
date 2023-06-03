@@ -4,8 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use Illuminate\Support\Facades\Auth;
-
 class SignUpRequest extends FormRequest
 {
     /**
@@ -30,7 +28,7 @@ class SignUpRequest extends FormRequest
             'username' => 'required|string|unique:users,username',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            'profile_image_id' => 'required|integer|exists:media_objects,id'
+            'profile_image_id' => 'required|integer|exists:media_objects,id',
         ];
     }
 

@@ -11,10 +11,9 @@ class MessageAction extends Model
     use HasFactory;
     use HasUser;
 
-
     protected $fillable = [
         'user_id',
         'message_id',
-        'action'
+        'action',
     ];
 }

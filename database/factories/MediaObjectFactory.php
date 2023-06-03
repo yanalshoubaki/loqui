@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -19,13 +18,14 @@ class MediaObjectFactory extends Factory
     public function definition()
     {
         $placeHolderImage = Image::make(resource_path('images/placeholder.png'));
+
         return [
             'media_path' => $placeHolderImage->basePath(),
             'media_type' => 'image',
             'media_name' => $placeHolderImage->filename,
             'media_size' => $placeHolderImage->filesize(),
             'media_extension' => $placeHolderImage->extension,
-            'media_mime_type' => $placeHolderImage->mime
+            'media_mime_type' => $placeHolderImage->mime,
         ];
     }
 }

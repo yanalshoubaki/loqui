@@ -17,8 +17,8 @@ class UserFollowFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'=>null,
-            'follow_id'=>null,
+            'user_id' => null,
+            'follow_id' => null,
         ];
     }
 }

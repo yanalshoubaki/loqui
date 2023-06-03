@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\MessageResource;
-use App\Http\Resources\UserResource;
 use App\Models\Message;
 use App\Models\UserFollow;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class HomeController extends GeneralController
 {
-
-
     public function index(Request $request)
     {
         /** @var \App\Models\User $currentUser */
@@ -22,12 +18,11 @@ class HomeController extends GeneralController
             return redirect()->route('home');
         }
 
-
-        /** @var \Illuminate\Database\Eloquent\Collection $getUserFollowing  */
+        /** @var \Illuminate\Database\Eloquent\Collection $getUserFollowing */
         $getUserFollowing = $currentUser->following()->get();
-        /** @var \Illuminate\Database\Eloquent\Collection $getUserFollower  */
+        /** @var \Illuminate\Database\Eloquent\Collection $getUserFollower */
         $getUserFollower = $currentUser->follower()->get();
-        /** @var \Illuminate\Database\Eloquent\Collection $getMessages  */
+        /** @var \Illuminate\Database\Eloquent\Collection $getMessages */
         $getMessages = $currentUser->messages()->get();
 
         $getMessages->each(function (Message $message) {
@@ -38,7 +33,7 @@ class HomeController extends GeneralController
             $follower->load('user');
         });
 
-        /** @var \Illuminate\Database\Eloquent\Collection $getMessages  */
+        /** @var \Illuminate\Database\Eloquent\Collection $getMessages */
         $getMessagesByFollowing = $currentUser->messages()->whereIn('user_id', $getUserFollowing->pluck('user_id'))->whereHas('replay')->get();
 
         return $this->renderInertia('Home', [

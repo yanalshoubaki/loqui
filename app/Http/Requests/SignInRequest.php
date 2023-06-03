@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SignInRequest extends FormRequest
@@ -27,7 +26,7 @@ class SignInRequest extends FormRequest
         return [
             'email' => 'required|email',
             'password' => 'required|min:6',
-            'remmember' => 'nullable|boolean'
+            'remmember' => 'nullable|boolean',
         ];
     }
 

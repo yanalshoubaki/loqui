@@ -17,17 +17,18 @@ class EditAppIntro extends EditRecord
     {
         $data['mediaObjects'] = Image::make(Storage::disk('public')->path($data['mediaObjects']['media_path']));
         // create new media object record
-        $mediaObjectData =  [
+        $mediaObjectData = [
             'media_path' => $data['mediaObjects']->basename,
             'media_type' => 'image',
             'media_name' => $data['mediaObjects']->filename,
             'media_size' => $data['mediaObjects']->filesize(),
             'media_extension' => $data['mediaObjects']->extension,
-            'media_mime_type' => $data['mediaObjects']->mime
+            'media_mime_type' => $data['mediaObjects']->mime,
         ];
         $mediaObject = MediaObject::create($mediaObjectData);
         // update user record with media object id
         $data['intro_image_id'] = $mediaObject->id;
+
         return $data;
     }
 

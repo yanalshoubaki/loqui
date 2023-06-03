@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\MediaObject;
-use Closure;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -29,7 +28,6 @@ class UserFactory extends Factory
             'profile_image_id' => MediaObject::factory()->create(),
         ];
     }
-
 
     /**
      * Indicate that the model's email address should be unverified.

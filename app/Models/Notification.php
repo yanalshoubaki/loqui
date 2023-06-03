@@ -11,7 +11,6 @@ class Notification extends Model
     use HasFactory;
     use HasUser;
 
-
     protected $fillable = [
         'user_id',
         'receiver_id',
@@ -19,6 +18,6 @@ class Notification extends Model
         'title',
         'content',
         'url',
-        'is_read'
+        'is_read',
     ];
 }

@@ -14,7 +14,6 @@ class MediaObjectResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photograph';
 
-
     public static function table(Table $table): Table
     {
         return $table
@@ -24,11 +23,10 @@ class MediaObjectResource extends Resource
             ]);
     }
 
-
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMediaObjects::route('/')
+            'index' => Pages\ListMediaObjects::route('/'),
         ];
     }
 }

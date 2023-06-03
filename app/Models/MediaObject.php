@@ -9,7 +9,6 @@ class MediaObject extends Model
 {
     use HasFactory;
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -22,13 +21,16 @@ class MediaObject extends Model
         'media_size',
         'media_extension',
         'media_mime_type',
-        'media_dimensions'
+        'media_dimensions',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->hasMany(User::class, 'profile_image_id', 'id');
     }
-    public function appIntro() {
+
+    public function appIntro()
+    {
         return $this->hasMany(AppIntro::class, 'intro_image_id', 'id');
     }
 }

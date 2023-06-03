@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateUserMetaRequest extends FormRequest
 {
@@ -26,7 +26,7 @@ class UpdateUserMetaRequest extends FormRequest
     {
         return [
             'meta_key' => 'required|string',
-            'meta_value' => 'required|boolean'
+            'meta_value' => 'required|boolean',
         ];
     }
 

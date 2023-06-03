@@ -19,7 +19,7 @@ class MessageReplayResource extends JsonResource
             'message' => new MessageResource($this->message),
             'user' => new UserResource($this->user),
             'replay' => $this->replay,
-            'image' => $this->mediaObject && new MediaObjectResource($this->mediaObject)
+            'image' => $this->mediaObject && new MediaObjectResource($this->mediaObject),
         ];
     }
 }

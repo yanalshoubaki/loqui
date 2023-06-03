@@ -3,16 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AppIntroResource\Pages;
-use App\Filament\Resources\AppIntroResource\RelationManagers;
 use App\Models\AppIntro;
-use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AppIntroResource extends Resource
 {
@@ -24,12 +20,12 @@ class AppIntroResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Personal information') ->schema([
+                Forms\Components\Section::make('Personal information')->schema([
                     Forms\Components\TextInput::make('intro_title')
                         ->required(),
                     Forms\Components\TextInput::make('intro_description')
                         ->required(),
-                    Forms\Components\FileUpload::make('mediaObjects.media_path')->required()
+                    Forms\Components\FileUpload::make('mediaObjects.media_path')->required(),
                 ])
                     ->collapsible(),
             ]);

@@ -9,8 +9,6 @@ trait HasUser
 {
     /**
      * Get the user that owns the model.
-     *
-     * @return BelongsTo
      */
     public function user(): BelongsTo
     {

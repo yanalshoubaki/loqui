@@ -5,10 +5,9 @@ namespace App\Traits;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 
-
 trait UserOauthTrait
 {
-    public function getAccessToken(array  $credentials)
+    public function getAccessToken(array $credentials)
     {
         $request = Request::create('oauth/token', 'POST', $credentials, [], [], [
             'HTTP_Accept' => 'application/json',

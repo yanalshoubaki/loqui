@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
-use Filament\Resources\Resource;
 use App\Filament\Resources\UserResource\Pages;
-use App\Models\MediaObject;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
+use Filament\Forms;
+use Filament\Resources\Form;
+use Filament\Resources\Resource;
+use Filament\Resources\Table;
+use Filament\Tables;
 
 class UserResource extends Resource
 {
@@ -22,7 +20,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Personal information') ->schema([
+                Forms\Components\Section::make('Personal information')->schema([
                     Forms\Components\TextInput::make('name')
                         ->required(),
                     Forms\Components\TextInput::make('username')
@@ -32,15 +30,15 @@ class UserResource extends Resource
                         ->required()
                         ->email()
                         ->unique(User::class, 'email', ignoreRecord: true),
-                        Forms\Components\TextInput::make('password')
+                    Forms\Components\TextInput::make('password')
                         ->required()
                         ->password(),
-                        Forms\Components\Select::make('roles')->multiple()->relationship('roles', 'name')->required(),
-                        Forms\Components\Toggle::make('status')
+                    Forms\Components\Select::make('roles')->multiple()->relationship('roles', 'name')->required(),
+                    Forms\Components\Toggle::make('status')
                         ->onColor(1)
                         ->required()
                         ->offColor(0),
-                    Forms\Components\FileUpload::make('mediaObjects.media_path')->required()
+                    Forms\Components\FileUpload::make('mediaObjects.media_path')->required(),
                 ])
                     ->collapsible(),
             ]);
