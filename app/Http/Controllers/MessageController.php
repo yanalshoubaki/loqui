@@ -64,12 +64,12 @@ class MessageController extends GeneralController
                 ->where('id', $inputs['message_id'])
                 ->first();
 
-            if (!$message) {
+            if (! $message) {
                 return $this->responseError('Message not found');
             }
 
             $isCreated = $message->replay()->create($inputs);
-            if (!$isCreated) {
+            if (! $isCreated) {
                 return $this->responseError('Message replay not created');
             }
 
@@ -97,10 +97,11 @@ class MessageController extends GeneralController
             $inputs = $request->getInputs();
 
             $isCreated = Message::create($inputs);
-            if (!$isCreated) {
+            if (! $isCreated) {
                 return $this->responseError('Message replay not created');
             }
             event(new \App\Events\NewMessageEvent(new MessageResource($isCreated)));
+
             return redirect()->route('user.show', [
                 'user' => $isCreated->user,
             ]);
