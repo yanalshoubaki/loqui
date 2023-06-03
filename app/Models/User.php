@@ -6,19 +6,19 @@ namespace App\Models;
 
 use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 use App\Traits\HasMedia;
+use Illuminate\Support\Str;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable implements FilamentUser
 {
     use HasFactory;
     use Notifiable;
     use HasMedia;
-    use HasApiTokens;
     use HasRoles;
     use HasSuperAdmin;
 

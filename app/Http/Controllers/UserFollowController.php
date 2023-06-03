@@ -22,10 +22,18 @@ class UserFollowController extends GeneralController
             $getUserFollower = $user->follower()->get()->map(function ($item) {
                 return new UserResource($item->user);
             });
+            $this->redis->set('user:data:follower:' . $user->id, json_encode(
+                $getUserFollower
+            ));
+            $this->redis->set('user:data:following:' . $user->id, json_encode(
+                $getUserFollowing
+            ));
+            $userFollower = $this->redis->get('user:data:follower:' . $user->id);
+            $userFollowing = $this->redis->get('user:data:following:' . $user->id);
 
             return $this->renderInertia('User/Follow', [
-                'following' => $getUserFollowing,
-                'follower' => $getUserFollower,
+                'following' => json_decode($userFollowing),
+                'follower' => json_decode($userFollower),
             ]);
         } catch (\Throwable $th) {
             throw $th;
