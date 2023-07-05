@@ -10,15 +10,16 @@ use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser
-{
+class User extends Authenticatable implements FilamentUser {
     use HasFactory;
     use Notifiable;
     use HasMedia;
     use HasRoles;
     use HasSuperAdmin;
+    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -55,43 +56,35 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
     ];
 
-    public function meta()
-    {
+    public function meta() {
         return $this->hasMany(UserMeta::class, 'user_id');
     }
 
-    public function authApp()
-    {
+    public function authApp() {
         return $this->hasMany(UserAuthApp::class, 'user_id');
     }
 
-    public function following()
-    {
+    public function following() {
         return $this->hasMany(UserFollow::class, 'user_id');
     }
 
-    public function follower()
-    {
+    public function follower() {
         return $this->hasMany(UserFollow::class, 'follow_id');
     }
 
-    public function social()
-    {
+    public function social() {
         return $this->hasMany(UserSocial::class, 'user_id');
     }
 
-    public function messages()
-    {
+    public function messages() {
         return $this->hasMany(Message::class, 'user_id');
     }
 
-    public function mediaObject()
-    {
+    public function mediaObject() {
         return $this->belongsTo(MediaObject::class, 'profile_image_id', 'id');
     }
 
-    public function canAccessFilament(): bool
-    {
+    public function canAccessFilament(): bool {
         return str_ends_with($this->email, '@yanalshoubaki.com');
     }
 }

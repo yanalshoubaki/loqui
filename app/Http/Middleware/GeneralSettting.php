@@ -2,20 +2,18 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Controllers\API\ApiHandler;
+use App\Http\Controllers\API\Handler;
 use App\Models\Language;
 use Closure;
 use Illuminate\Http\Request;
 
-class GeneralSettting
-{
+class GeneralSettting {
     /**
-     * @var ApiHandler
+     * @var Handler
      */
     private $apiHandler;
 
-    public function __construct(ApiHandler $apiHandler)
-    {
+    public function __construct(Handler $apiHandler) {
         $this->apiHandler = $apiHandler;
     }
 
@@ -25,8 +23,7 @@ class GeneralSettting
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function handle(Request $request, Closure $next)
-    {
+    public function handle(Request $request, Closure $next) {
         $lang = $request->header('x-language', 'en');
         $token = $request->header('x-token', null);
         if ($language = Language::where('language_slug', $lang)->first()) {
@@ -41,6 +38,6 @@ class GeneralSettting
             }
         }
 
-        return $this->apiHandler->getResponse(null, 'Unauthorized', 'error');
+        return $this->apiHandler->responseError("Unauthorized", 401);
     }
 }
