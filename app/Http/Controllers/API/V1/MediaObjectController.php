@@ -9,23 +9,21 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-class MediaObjectController extends Handler {
-
+class MediaObjectController extends Handler
+{
     /**
      * Create new media object
-     *
-     * @param CreateMediaObjectRequest $request
-     * @return JsonResponse
      */
-    public function createMedia(CreateMediaObjectRequest $request): JsonResponse {
+    public function createMedia(CreateMediaObjectRequest $request): JsonResponse
+    {
         try {
-            $image = date('Y') . '/' . date('m') . '/' . random_int(500, 999) * time() . '.' . $request->media->extension();
+            $image = date('Y').'/'.date('m').'/'.random_int(500, 999) * time().'.'.$request->media->extension();
             /** @var \Illuminate\Contracts\Filesystem\Filesystem $publicStorage */
             Storage::putFileAs('public', $request->media, $image, 'public');
-            $mediaImage = Image::make(public_path('storage/' . $image));
+            $mediaImage = Image::make(public_path('storage/'.$image));
 
             $mediaObject = [
-                'media_path' => 'storage/' . $image,
+                'media_path' => 'storage/'.$image,
                 'media_type' => 'image',
                 'media_name' => $mediaImage->filename,
                 'media_size' => $mediaImage->filesize(),
@@ -33,6 +31,7 @@ class MediaObjectController extends Handler {
                 'media_mime_type' => $mediaImage->mime,
             ];
             $image = MediaObject::create($mediaObject);
+
             return $this->responseSuccess([
                 'media' => $image,
             ], 201);

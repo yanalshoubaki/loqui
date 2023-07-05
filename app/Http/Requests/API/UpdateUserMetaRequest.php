@@ -5,13 +5,15 @@ namespace App\Http\Requests\API;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UpdateUserMetaRequest extends FormRequest {
+class UpdateUserMetaRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return Auth::check();
     }
 
@@ -20,14 +22,16 @@ class UpdateUserMetaRequest extends FormRequest {
      *
      * @return array<string, mixed>
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'meta_key' => 'required|string',
             'meta_value' => 'required|boolean',
         ];
     }
 
-    public function getInputs() {
+    public function getInputs()
+    {
         return $this->only(['meta_key', 'meta_value']);
     }
 }

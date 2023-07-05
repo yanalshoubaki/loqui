@@ -11,15 +11,15 @@
 |
 */
 
-use App\Http\Controllers\API\V1\MediaObjectController;
 use App\Http\Controllers\API\V1\AuthController;
+use App\Http\Controllers\API\V1\MediaObjectController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix("/auth")->name("auth.")->middleware("guest")->controller(AuthController::class)->group(function () {
-    Route::post("/sign-in", "signIn")->name("sign-in");
-    Route::post("/sign-up", "signUp")->name("sign-up");
+Route::prefix('/auth')->name('auth.')->middleware('guest')->controller(AuthController::class)->group(function () {
+    Route::post('/sign-in', 'signIn')->name('sign-in');
+    Route::post('/sign-up', 'signUp')->name('sign-up');
 });
 
-Route::prefix("/media")->name("media.")->middleware("auth:api")->controller(MediaObjectController::class)->group(function () {
-    Route::post("/create-media", "createMedia")->name("create-media");
+Route::prefix('/media')->name('media.')->middleware('auth:api')->controller(MediaObjectController::class)->group(function () {
+    Route::post('/create-media', 'createMedia')->name('create-media');
 });

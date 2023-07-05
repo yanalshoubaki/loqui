@@ -5,13 +5,15 @@ namespace App\Http\Requests\API;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class RefreshTokenRequest extends FormRequest {
+class RefreshTokenRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
 
         return Auth::check();
     }
@@ -21,13 +23,15 @@ class RefreshTokenRequest extends FormRequest {
      *
      * @return array<string, mixed>
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'refresh_token' => 'required|string',
         ];
     }
 
-    public function getCredential() {
+    public function getCredential()
+    {
         return $this->only(['refresh_token']);
     }
 }

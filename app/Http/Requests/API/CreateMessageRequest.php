@@ -5,13 +5,15 @@ namespace App\Http\Requests\API;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CreateMessageRequest extends FormRequest {
+class CreateMessageRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return Auth::check();
     }
 
@@ -20,7 +22,8 @@ class CreateMessageRequest extends FormRequest {
      *
      * @return array<string, mixed>
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'message' => 'required|string',
             'is_anon' => 'required|boolean',
@@ -34,7 +37,8 @@ class CreateMessageRequest extends FormRequest {
         ];
     }
 
-    public function getInputs(): array {
+    public function getInputs(): array
+    {
         return $this->only([
             'message', 'is_anon', 'receiver_id',
         ]);

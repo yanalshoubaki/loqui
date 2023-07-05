@@ -4,13 +4,15 @@ namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignInRequest extends FormRequest {
+class SignInRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -19,7 +21,8 @@ class SignInRequest extends FormRequest {
      *
      * @return array<string, mixed>
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'email' => 'required|email',
             'password' => 'required|min:6',
@@ -27,11 +30,13 @@ class SignInRequest extends FormRequest {
         ];
     }
 
-    public function getInput() {
+    public function getInput()
+    {
         return $this->only(['email', 'password']);
     }
 
-    public function getRemember() {
+    public function getRemember()
+    {
         return $this->has('remember');
     }
 }

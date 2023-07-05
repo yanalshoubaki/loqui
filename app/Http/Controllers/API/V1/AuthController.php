@@ -13,19 +13,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
-class AuthController extends Handler {
+class AuthController extends Handler
+{
     use UserOauthTrait;
 
     /**
      * Sign in request
-     *
-     * @param SignInRequest $request
-     * @return JsonResponse
      */
-    public function signIn(SignInRequest $request): JsonResponse {
+    public function signIn(SignInRequest $request): JsonResponse
+    {
         try {
             $credentials = $request->getInput();
-            if (!Auth::attempt([
+            if (! Auth::attempt([
                 'email' => $credentials['email'],
                 'password' => $credentials['password'],
 
@@ -55,18 +54,16 @@ class AuthController extends Handler {
 
     /**
      * Sign Up Request
-     *
-     * @param SignUpRequest $request
-     * @return JsonResponse
      */
-    public function signUp(SignUpRequest $request): JsonResponse {
+    public function signUp(SignUpRequest $request): JsonResponse
+    {
         try {
             $credentials = $request->getInput();
             $credentials['password'] = Hash::make($credentials['password']);
             $image = fake()->image(storage_path('app/public'), 500, 500, null, false);
-            $placeHolderImage = Image::make(public_path('storage/' . $image));
-            $image =  [
-                'media_path' => 'storage/' . $image,
+            $placeHolderImage = Image::make(public_path('storage/'.$image));
+            $image = [
+                'media_path' => 'storage/'.$image,
                 'media_type' => 'image',
                 'media_name' => $placeHolderImage->filename,
                 'media_size' => $placeHolderImage->filesize(),
@@ -99,13 +96,12 @@ class AuthController extends Handler {
 
     /**
      * Sign out request
-     *
-     * @param Request $request
-     * @return JsonResponse
      */
-    public function signOut(Request $request): JsonResponse {
+    public function signOut(Request $request): JsonResponse
+    {
         try {
             $request->user()->token()->revoke();
+
             return $this->responseSuccess([
                 'message' => 'Successfully logged out',
             ]);

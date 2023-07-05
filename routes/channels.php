@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Notification;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Broadcast;
 

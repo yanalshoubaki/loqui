@@ -4,13 +4,15 @@ namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignUpRequest extends FormRequest {
+class SignUpRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -19,7 +21,8 @@ class SignUpRequest extends FormRequest {
      *
      * @return array<string, mixed>
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'name' => 'required|string',
             'username' => 'required|string|unique:users,username',
@@ -29,7 +32,8 @@ class SignUpRequest extends FormRequest {
         ];
     }
 
-    public function getInput() {
+    public function getInput()
+    {
         return $this->only(['name', 'username', 'email', 'password', 'profile_image_id']);
     }
 }
