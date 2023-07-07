@@ -9,12 +9,10 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void {
-        Schema::create('message_replays', function (Blueprint $table) {
+        Schema::create('user_followers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('message_id')->constrained('messages');
-            $table->foreignId('user_id')->constrained('users');
-            $table->text('replay');
-            $table->foreignId('media_object_id')->constrained('media_objects');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('follow_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -23,6 +21,6 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
-        Schema::dropIfExists('message_replays');
+        Schema::dropIfExists('user_followers');
     }
 };
