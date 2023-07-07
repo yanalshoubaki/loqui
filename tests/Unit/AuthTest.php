@@ -6,8 +6,6 @@ beforeEach(function () {
     $this->user = User::factory()->create();
 });
 
-
-
 it('shown error when login and email not supplied', function () {
     $response = $this->postJson('/api/auth/sign-in', [
         'password' => 'password',
@@ -28,7 +26,6 @@ it('shown error when login and password not supplied', function () {
     $response->assertStatus(422)->assertJson(['message' => 'The password field is required.']);
 });
 
-
 it('can login', function () {
 
     /** @var Illuminate\Testing\TestResponse $response */
@@ -45,7 +42,6 @@ it('can login', function () {
         'status' => 'success',
     ]);
 });
-
 
 it('shown error when sign up and profile image id not supplied', function () {
     $user = User::factory()->raw();
@@ -79,7 +75,6 @@ it('shown error when sign up and usernanme is exists', function () {
     $response->assertStatus(422)->assertJson(['message' => 'The username has already been taken.']);
 });
 
-
 it('can sign up', function () {
     $user = User::factory()->raw();
     unset($user['password']);
@@ -93,4 +88,3 @@ it('can sign up', function () {
         'status' => 'success',
     ]);
 });
-

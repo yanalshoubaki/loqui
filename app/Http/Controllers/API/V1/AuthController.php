@@ -42,7 +42,6 @@ class AuthController extends Handler
                 'scope' => '',
             ]);
 
-
             return $this->responseSuccess([
                 'token' => $token,
                 'user' => $user,
@@ -61,9 +60,9 @@ class AuthController extends Handler
             $credentials = $request->getInput();
             $credentials['password'] = Hash::make($credentials['password']);
             $fakeImage = fake()->image('public/storage', 640, 480, null, false);
-            $placeHolderImage = Image::make(public_path('storage/' . $fakeImage));
-            $mediaObjectData =  [
-                'media_path' => 'storage/' . $fakeImage,
+            $placeHolderImage = Image::make(public_path('storage/'.$fakeImage));
+            $mediaObjectData = [
+                'media_path' => 'storage/'.$fakeImage,
                 'media_type' => 'image',
                 'media_name' => $placeHolderImage->filename,
                 'media_size' => $placeHolderImage->filesize(),
@@ -85,6 +84,7 @@ class AuthController extends Handler
                 'password' => $request->getInput()['password'],
                 'scope' => '',
             ]);
+
             return $this->responseSuccess([
                 'token' => $token,
                 'user' => $user,

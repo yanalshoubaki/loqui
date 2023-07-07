@@ -19,10 +19,10 @@ class MediaObjectFactory extends Factory
     {
 
         $image = fake()->image('public/storage', 640, 480, null, false);
-        $placeHolderImage = Image::make(public_path('storage/' . $image));
+        $placeHolderImage = Image::make(public_path('storage/'.$image));
 
         return [
-            'media_path' => 'storage/' . $image,
+            'media_path' => 'storage/'.$image,
             'media_type' => 'image',
             'media_name' => $placeHolderImage->filename,
             'media_size' => $placeHolderImage->filesize(),
