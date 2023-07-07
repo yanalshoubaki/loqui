@@ -30,7 +30,7 @@ class UpdateUserRequest extends FormRequest
             'email' => 'required|email|unique:users,email,'.$this->user()->id,
             'username' => 'required|string|unique:users,username,'.$this->user()->id,
             'password' => 'required|string|min:8|confirmed',
-            'profile_image_id' => 'nullable|exists:media,id',
+            'media_object_id' => 'nullable|exists:media,id',
         ];
     }
 
@@ -39,7 +39,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => $this->name,
             'username' => $this->username,
-            'profile_image_id' => $this->profile_image_id,
+            'media_object_id' => $this->media_object_id,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ];

@@ -26,7 +26,7 @@ class MediaObject extends Model
 
     public function user()
     {
-        return $this->hasMany(User::class, 'profile_image_id', 'id');
+        return $this->hasMany(User::class, 'media_object_id', 'id');
     }
 
     public function appIntro()

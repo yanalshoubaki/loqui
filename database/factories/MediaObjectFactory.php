@@ -17,10 +17,12 @@ class MediaObjectFactory extends Factory
      */
     public function definition()
     {
-        $placeHolderImage = Image::make(resource_path('images/placeholder.png'));
+
+        $image = fake()->image('public/storage', 640, 480, null, false);
+        $placeHolderImage = Image::make(public_path('storage/' . $image));
 
         return [
-            'media_path' => $placeHolderImage->basePath(),
+            'media_path' => 'storage/' . $image,
             'media_type' => 'image',
             'media_name' => $placeHolderImage->filename,
             'media_size' => $placeHolderImage->filesize(),

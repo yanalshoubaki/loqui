@@ -6,18 +6,9 @@ beforeEach(function () {
     $this->user = User::factory()->create();
 });
 
-it('can login', function () {
-    $response = $this->postJson('/api/auth/sign-in', [
-        'email' => $this->user->email,
-        'password' => 'password',
-    ], [
-        'Accept' => 'application/json',
-        'x-token' => env('APP_TOKEN'),
-    ]);
-    $response->assertStatus(200)->assertJson(['message' => 'login success', 'status' => 'success']);
-});
 
-it('error when email not supplied', function () {
+
+it('shown error when login and email not supplied', function () {
     $response = $this->postJson('/api/auth/sign-in', [
         'password' => 'password',
     ], [
@@ -27,7 +18,7 @@ it('error when email not supplied', function () {
     $response->assertStatus(422)->assertJson(['message' => 'The email field is required.']);
 });
 
-it('error when password not supplied', function () {
+it('shown error when login and password not supplied', function () {
     $response = $this->postJson('/api/auth/sign-in', [
         'email' => $this->user->email,
     ], [
@@ -37,20 +28,28 @@ it('error when password not supplied', function () {
     $response->assertStatus(422)->assertJson(['message' => 'The password field is required.']);
 });
 
-it('can sign up', function () {
-    $user = User::factory()->raw();
-    $user['profile_image_id'] = 1;
-    $user['password'] = 'password';
-    $response = $this->postJson('/api/auth/sign-up', $user, [
+
+it('can login', function () {
+
+    /** @var Illuminate\Testing\TestResponse $response */
+    $response = $this->postJson('/api/auth/sign-in', [
+        'email' => $this->user->email,
+        'password' => 'password',
+    ], [
         'Accept' => 'application/json',
         'x-token' => env('APP_TOKEN'),
     ]);
-    $response->assertStatus(200)->assertJson(['message' => 'register success', 'status' => 'success']);
+
+    $response->assertSuccessful();
+    $response->assertJson([
+        'status' => 'success',
+    ]);
 });
 
-it('error when profile image id not supplied', function () {
+
+it('shown error when sign up and profile image id not supplied', function () {
     $user = User::factory()->raw();
-    unset($user['profile_image_id']);
+    unset($user['media_object_id']);
     $response = $this->postJson('/api/auth/sign-up', $user, [
         'Accept' => 'application/json',
         'x-token' => env('APP_TOKEN'),
@@ -58,7 +57,7 @@ it('error when profile image id not supplied', function () {
     $response->assertStatus(422);
 });
 
-it('error when email is exists', function () {
+it('shown error when sign up and email is exists', function () {
     $user = User::factory()->raw([
         'email' => 'yanalshoubaki233@gmail.com',
     ]);
@@ -69,7 +68,7 @@ it('error when email is exists', function () {
     $response->assertStatus(422)->assertJson(['message' => 'The email has already been taken.']);
 });
 
-it('error when usernanme is exists', function () {
+it('shown error when sign up and usernanme is exists', function () {
     $user = User::factory()->raw([
         'username' => 'yanalshoubaki',
     ]);
@@ -79,3 +78,19 @@ it('error when usernanme is exists', function () {
     ]);
     $response->assertStatus(422)->assertJson(['message' => 'The username has already been taken.']);
 });
+
+
+it('can sign up', function () {
+    $user = User::factory()->raw();
+    unset($user['password']);
+    $user['password'] = 'password';
+    $response = $this->postJson('/api/auth/sign-up', $user, [
+        'Accept' => 'application/json',
+        'x-token' => env('APP_TOKEN'),
+    ]);
+    $response->assertSuccessful();
+    $response->assertJson([
+        'status' => 'success',
+    ]);
+});
+

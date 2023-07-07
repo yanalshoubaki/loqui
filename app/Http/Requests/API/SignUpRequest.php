@@ -28,12 +28,12 @@ class SignUpRequest extends FormRequest
             'username' => 'required|string|unique:users,username',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            'profile_image_id' => 'required|integer|exists:media_objects,id',
+            'media_object_id' => 'required|integer|exists:media_objects,id',
         ];
     }
 
     public function getInput()
     {
-        return $this->only(['name', 'username', 'email', 'password', 'profile_image_id']);
+        return $this->only(['name', 'username', 'email', 'password', 'media_object_id']);
     }
 }

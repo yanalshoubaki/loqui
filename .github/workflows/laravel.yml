@@ -43,13 +43,13 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, redis
           coverage: none
 
       # Local MySQL service in GitHub hosted environments is disabled by default.
       # If you are using it instead of service containers, make sure you start it.
-      # - name: Start mysql service
-      #   run: sudo systemctl start mysql.service
+      - name: Start mysql service
+        run: sudo systemctl start mysql.service
 
       - name: Get composer cache directory
         id: composer-cache
@@ -79,7 +79,8 @@ jobs:
       - name: Run Migration
         run: |
           php artisan migrate
-          php artisan passport:install --force
+          php artisan passport:client --password
+
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}

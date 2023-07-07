@@ -28,7 +28,7 @@ class CreateUser extends CreateRecord
         ];
         $mediaObject = MediaObject::create($mediaObjectData);
         // update user record with media object id
-        $data['profile_image_id'] = $mediaObject->id;
+        $data['media_object_id'] = $mediaObject->id;
         $data['password'] = Hash::make($data['password']);
 
         return $data;

@@ -3,8 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\MediaObject;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -23,9 +26,9 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
-            'media_object_id' => MediaObject::factory()->create(),
+            "media_object_id" => MediaObject::factory()->create(),
         ];
     }
 
@@ -40,4 +43,5 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
 }

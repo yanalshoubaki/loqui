@@ -42,6 +42,7 @@ class AuthController extends Handler
                 'scope' => '',
             ]);
 
+
             return $this->responseSuccess([
                 'token' => $token,
                 'user' => $user,
@@ -59,17 +60,18 @@ class AuthController extends Handler
         try {
             $credentials = $request->getInput();
             $credentials['password'] = Hash::make($credentials['password']);
-            $image = fake()->image(storage_path('app/public'), 500, 500, null, false);
-            $placeHolderImage = Image::make(public_path('storage/'.$image));
-            $image = [
-                'media_path' => 'storage/'.$image,
+            $fakeImage = fake()->image('public/storage', 640, 480, null, false);
+            $placeHolderImage = Image::make(public_path('storage/' . $fakeImage));
+            $mediaObjectData =  [
+                'media_path' => 'storage/' . $fakeImage,
                 'media_type' => 'image',
                 'media_name' => $placeHolderImage->filename,
                 'media_size' => $placeHolderImage->filesize(),
                 'media_extension' => $placeHolderImage->extension,
                 'media_mime_type' => $placeHolderImage->mime,
             ];
-            $image = \App\Models\MediaObject::create($image);
+
+            $image = \App\Models\MediaObject::create($mediaObjectData);
             $credentials['media_object_id'] = $image->id;
             /** @var \App\Models\User $user */
             $user = User::create($credentials);
@@ -80,10 +82,9 @@ class AuthController extends Handler
                 'client_id' => env('PASSPORT_CLIENT_ID'),
                 'client_secret' => env('PASSPORT_CLIENT_SECRET'),
                 'username' => $user->email,
-                'password' => $credentials['password'],
+                'password' => $request->getInput()['password'],
                 'scope' => '',
             ]);
-
             return $this->responseSuccess([
                 'token' => $token,
                 'user' => $user,

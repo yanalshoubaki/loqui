@@ -89,7 +89,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function mediaObject()
     {
-        return $this->belongsTo(MediaObject::class, 'profile_image_id', 'id');
+        return $this->belongsTo(MediaObject::class, 'media_object_id', 'id');
     }
 
     public function canAccessFilament(): bool
