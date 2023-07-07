@@ -27,7 +27,6 @@ class AuthController extends Handler
             if (! Auth::attempt([
                 'email' => $credentials['email'],
                 'password' => $credentials['password'],
-
             ], $credentials['remember_me'] ?? false)) {
                 return $this->responseError('Unauthorized', 401);
             }

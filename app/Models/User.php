@@ -5,7 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
-use App\Traits\HasMedia;
+use App\Traits\HasMediaObject;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,7 +17,7 @@ class User extends Authenticatable implements FilamentUser
 {
     use HasFactory;
     use Notifiable;
-    use HasMedia;
+    use HasMediaObject;
     use HasRoles;
     use HasSuperAdmin;
     use HasApiTokens;
@@ -30,7 +30,7 @@ class User extends Authenticatable implements FilamentUser
     protected $fillable = [
         'name',
         'username',
-        'profile_image_id',
+        'media_object_id',
         'email',
         'status',
         'password',
@@ -67,14 +67,12 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(UserAuthApp::class, 'user_id');
     }
 
-    public function following()
-    {
-        return $this->hasMany(UserFollow::class, 'user_id');
+    public function following() {
+        return $this->hasMany(UserFollowing::class, 'user_id');
     }
 
-    public function follower()
-    {
-        return $this->hasMany(UserFollow::class, 'follow_id');
+    public function follower() {
+        return $this->hasMany(UserFollower::class, 'follow_id');
     }
 
     public function social()

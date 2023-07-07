@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\HasMedia;
+use App\Traits\HasMediaObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AppInfo extends Model
-{
+class AppInfo extends Model {
     use HasFactory;
-    use HasMedia;
+    use HasMediaObject;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +18,7 @@ class AppInfo extends Model
     protected $fillable = [
         'app_name',
         'app_description',
-        'app_logo_id',
-        'app_favicon_id',
+        'media_object_id',
         'app_url',
         'app_email',
     ];
