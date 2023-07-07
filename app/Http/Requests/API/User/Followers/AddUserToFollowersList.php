@@ -23,7 +23,7 @@ class AddUserToFollowersList extends FormRequest
     public function rules(): array
     {
         return [
-            'follow_id' => 'required|integer|exists:users,id|different:' . Auth::id(),
+            'follow_id' => 'required|integer|exists:users,id|different:'.Auth::id(),
 
         ];
     }

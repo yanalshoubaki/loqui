@@ -6,7 +6,8 @@ use App\Traits\HasMediaObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AppIntro extends Model {
+class AppIntro extends Model
+{
     use HasFactory;
     use HasMediaObject;
 
@@ -21,7 +22,8 @@ class AppIntro extends Model {
         'media_object_id',
     ];
 
-    public function mediaObject() {
+    public function mediaObject()
+    {
         return $this->belongsTo(MediaObject::class, 'intro_image_id', 'id');
     }
 }

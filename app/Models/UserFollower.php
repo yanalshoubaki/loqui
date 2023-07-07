@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserFollower extends Model {
+class UserFollower extends Model
+{
     use HasFactory, HasUser;
 
     /**
@@ -22,10 +23,9 @@ class UserFollower extends Model {
 
     /**
      * Get the follow that owns the UserFollower
-     *
-     * @return BelongsTo
      */
-    public function follow(): BelongsTo {
+    public function follow(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'follow_id', 'id');
     }
 }

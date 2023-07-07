@@ -24,21 +24,19 @@ Route::prefix('/media')->name('media.')->middleware('auth:api')->controller(Medi
     Route::post('/create-media', 'createMedia')->name('create-media');
 });
 
-
-Route::prefix("/user")->name("user.")->middleware("auth:api")->controller(UserController::class)->group(function () {
-    Route::get("/profile", "getMyProfile");
-    Route::get("/profile/followers", "getMyFollowers");
-    Route::get("/profile/followings", "getMyFollowings");
-    Route::prefix("/following")->name("following.")->controller(UserController::class)->group(function () {
-        Route::get("/list", "getFollowingList");
-        Route::post("/add", "addUserToFollowingList");
-        Route::post("/remove", "removeUserFromFollowingList");
+Route::prefix('/user')->name('user.')->middleware('auth:api')->controller(UserController::class)->group(function () {
+    Route::get('/profile', 'getMyProfile');
+    Route::get('/profile/followers', 'getMyFollowers');
+    Route::get('/profile/followings', 'getMyFollowings');
+    Route::prefix('/following')->name('following.')->controller(UserController::class)->group(function () {
+        Route::get('/list', 'getFollowingList');
+        Route::post('/add', 'addUserToFollowingList');
+        Route::post('/remove', 'removeUserFromFollowingList');
     });
-    Route::prefix("/followers")->name("followers.")->controller(UserController::class)->group(function () {
-        Route::get("/list", "getFollowersList");
-        Route::post("/add", "addUserToFollowersList");
-        Route::post("/remove", "removeUserFromFollowersList");
+    Route::prefix('/followers')->name('followers.')->controller(UserController::class)->group(function () {
+        Route::get('/list', 'getFollowersList');
+        Route::post('/add', 'addUserToFollowersList');
+        Route::post('/remove', 'removeUserFromFollowersList');
     });
 
 });
-

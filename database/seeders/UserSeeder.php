@@ -3,19 +3,20 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\UserFollow;
 use App\Models\UserFollower;
 use App\Models\UserFollowing;
 use App\Models\UserMeta;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder {
+class UserSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         User::factory()->has(UserMeta::factory(), 'meta')->create([
             'email' => 'me@yanalshoubaki.com',
             'username' => 'yanalshoubaki',

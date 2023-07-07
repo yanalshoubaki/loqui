@@ -6,7 +6,8 @@ use App\Traits\HasMediaObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AppInfo extends Model {
+class AppInfo extends Model
+{
     use HasFactory;
     use HasMediaObject;
 

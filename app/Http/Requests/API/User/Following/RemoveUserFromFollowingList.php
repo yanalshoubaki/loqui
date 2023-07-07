@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\API\User\Following;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RemoveUserFromFollowingList extends FormRequest
 {
@@ -24,7 +24,7 @@ class RemoveUserFromFollowingList extends FormRequest
     public function rules(): array
     {
         return [
-            'follow_id' => 'required|integer|exists:users,id|different:' . Auth::id(),
+            'follow_id' => 'required|integer|exists:users,id|different:'.Auth::id(),
         ];
     }
 }

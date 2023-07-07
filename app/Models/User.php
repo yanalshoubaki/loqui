@@ -67,11 +67,13 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(UserAuthApp::class, 'user_id');
     }
 
-    public function following() {
+    public function following()
+    {
         return $this->hasMany(UserFollowing::class, 'user_id');
     }
 
-    public function follower() {
+    public function follower()
+    {
         return $this->hasMany(UserFollower::class, 'follow_id');
     }
 
