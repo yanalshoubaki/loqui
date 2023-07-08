@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\API\Handler;
 use App\Http\Requests\API\SignInRequest;
 use App\Http\Requests\API\SignUpRequest;
+use App\Jobs\NewUserWelcomeMail;
 use App\Models\User;
 use App\Traits\UserOauthTrait;
 use Illuminate\Http\JsonResponse;
@@ -19,6 +20,10 @@ class AuthController extends Handler
 
     /**
      * Sign in request
+     *
+     * @param SignInRequest $request
+     *
+     * @return JsonResponse
      */
     public function signIn(SignInRequest $request): JsonResponse
     {
@@ -53,25 +58,31 @@ class AuthController extends Handler
 
     /**
      * Sign Up Request
+     *
+     * @param \App\Http\Requests\API\SignUpRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function signUp(SignUpRequest $request): JsonResponse
     {
         try {
             $credentials = $request->getInput();
             $credentials['password'] = Hash::make($credentials['password']);
-            $fakeImage = fake()->image('public/storage', 640, 480, null, false);
-            $placeHolderImage = Image::make(public_path('storage/'.$fakeImage));
-            $mediaObjectData = [
-                'media_path' => 'storage/'.$fakeImage,
-                'media_type' => 'image',
-                'media_name' => $placeHolderImage->filename,
-                'media_size' => $placeHolderImage->filesize(),
-                'media_extension' => $placeHolderImage->extension,
-                'media_mime_type' => $placeHolderImage->mime,
-            ];
+            if (!$credentials['media_object_id']) {
+                $fakeImage = fake()->image('public/storage', 640, 480, null, false);
+                $placeHolderImage = Image::make(public_path('storage/' . $fakeImage));
+                $mediaObjectData = [
+                    'media_path' => 'storage/' . $fakeImage,
+                    'media_type' => 'image',
+                    'media_name' => $placeHolderImage->filename,
+                    'media_size' => $placeHolderImage->filesize(),
+                    'media_extension' => $placeHolderImage->extension,
+                    'media_mime_type' => $placeHolderImage->mime,
+                ];
 
-            $image = \App\Models\MediaObject::create($mediaObjectData);
-            $credentials['media_object_id'] = $image->id;
+                $image = \App\Models\MediaObject::create($mediaObjectData);
+                $credentials['media_object_id'] = $image->id;
+            }
             /** @var \App\Models\User $user */
             $user = User::create($credentials);
 
@@ -84,7 +95,7 @@ class AuthController extends Handler
                 'password' => $request->getInput()['password'],
                 'scope' => '',
             ]);
-
+            dispatch(new NewUserWelcomeMail($user));
             return $this->responseSuccess([
                 'token' => $token,
                 'user' => $user,
@@ -96,6 +107,10 @@ class AuthController extends Handler
 
     /**
      * Sign out request
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function signOut(Request $request): JsonResponse
     {

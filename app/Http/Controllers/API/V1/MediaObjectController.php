@@ -13,6 +13,10 @@ class MediaObjectController extends Handler
 {
     /**
      * Create new media object
+     *
+     * @param CreateMediaObjectRequest $request
+     *
+     * @return JsonResponse
      */
     public function createMedia(CreateMediaObjectRequest $request): JsonResponse
     {

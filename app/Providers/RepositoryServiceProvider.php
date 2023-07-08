@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Interfaces\MessageRepositoryInterface;
 use App\Interfaces\UserFollowerRepositoryInterface;
 use App\Interfaces\UserFollowingRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Repositories\MessageRepository;
 use App\Repositories\UserFollowerRepository;
 use App\Repositories\UserFollowingRepository;
 use App\Repositories\UserRepository;
@@ -20,6 +22,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(UserFollowingRepositoryInterface::class, UserFollowingRepository::class);
         $this->app->bind(UserFollowerRepositoryInterface::class, UserFollowerRepository::class);
+        $this->app->bind(MessageRepositoryInterface::class, MessageRepository::class);
     }
 
     /**

@@ -12,6 +12,8 @@
 */
 
 use App\Http\Controllers\API\V1\AuthController;
+use App\Http\Controllers\API\V1\MediaObjectController;
+use App\Http\Controllers\API\V1\MessageController;
 use App\Http\Controllers\API\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,5 +40,10 @@ Route::prefix('/user')->name('user.')->middleware('auth:api')->controller(UserCo
         Route::post('/add', 'addUserToFollowersList');
         Route::post('/remove', 'removeUserFromFollowersList');
     });
-
+    Route::prefix('/messages')->name('messages.')->controller(MessageController::class)->group(function () {
+        Route::get('/list', 'getAllMessagesWithReplay');
+        Route::get('/inbox', 'getAllMessagesWithoutReplay');
+        Route::get('/{id}', 'getMessageById');
+        Route::post('/send', 'sendMessage');
+    });
 });
